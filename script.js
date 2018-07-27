@@ -66,26 +66,63 @@
 
 // Example to show the differece between execution stack and scope chain
 
-var a = 'Hello!';
-first();
-
-function first() {
-    var b = 'Hi!';
-    second();
-
-    function second() {
-        var c = 'Hey!';
-        third()
-    }
-}
-
-function third() {
-    var d = 'John';
-    console.log(a + b + c + d);
-}
+// var a = 'Hello!';
+// first();
+//
+// function first() {
+//     var b = 'Hi!';
+//     second();
+//
+//     function second() {
+//         var c = 'Hey!';
+//         third()
+//     }
+// }
+//
+// function third() {
+//     var d = 'John';
+//     console.log(a + b + c + d);
+// }
 
 
 
 
 ///////////////////////////////////////
 // Lecture: The this keyword
+
+// console.log(this);
+
+// calculateAge(1985);
+//
+// function calculateAge(year) {
+//       console.log(2016 - year);
+//       console.log(this);
+// }
+
+var john = {
+      name: 'John',
+      yearOfBirth: 1990,
+      calculateAge: function() {
+            console.log(this);
+            console.log(2016 - this.yearOfBirth);
+
+            // function innerFunction () {
+            //       console.log(this);
+            // }
+            // innerFunction();
+      }
+};
+
+// Inner function even though it's inside the object, is not a method on an object, so it refers to the window object again
+
+john.calculateAge();
+
+var mike = {
+      name: 'Mike',
+      yearOfBirth: 1984
+};
+
+// Method borrowing, this variable is only assigned a variable when the object calls the method
+
+mike.calculateAge = john.calculateAge;
+mike.calculateAge();
